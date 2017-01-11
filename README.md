@@ -1,5 +1,5 @@
 # Air Quality Index Scraper
-__ a simple way to compare indexes between cities around the world __
+* a simple way to compare indexes between cities around the world *
 
 Uses the Mechanize gem to scrape data from the [World Air Quality Index project](http://aqicn.org/).
 Uses simple CSS styling through a [Ruby Sinatra](http://www.sinatrarb.com) app to differentiate between the quality of air in different cities around the world
