@@ -1,0 +1,5 @@
+<% @locations.each do |location| %>
+	<% page = @agent.get("#{location[:url]}") %>
+	<% value = page.search('.aqivalue').first.text %>
+	<li><%= "The AQI for #{location[:name]} is #{value}." %></li>
+<% end %>

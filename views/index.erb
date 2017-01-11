@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>AQI</title>
+		<meta lang="en" charset="utf-8">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+		<style>
+			#valuePlace {
+				-webkit-animation-delay: 3s;
+			    -moz-animation-delay: 3s;
+			    -o-animation-delay: 3s;
+			    -ms-animation-delay: 3s;
+			}
+
+			#inspiration {
+				font-size: 1.3em;
+				text-align: center;
+			}
+
+			.header {
+				overflow: auto;
+			}
+
+			.green-font {
+				color: #489A67;
+			}
+			.yellow-font {
+				color: #FBDE44;
+			}
+			.orange-font {
+				color: #F19837;
+			}
+			.red-font {
+				color: #CE3834;
+			}
+			.purple-font {
+				color: #682F99;
+			}
+			.maroon-font {
+				color: #7F2024;				
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="ui one column centered middle aligned grid">
+				<div class="row">
+					<div class="fourteen wide column">
+					<div class="ui hidden divider"></div>
+						<h2 class="ui center aligned icon header">
+							<i class="leaf icon"></i>
+							Air Quality Index
+						</h2>
+						<div class="centered">
+							<p id="inspiration"><i>Another glorious day, the air as delicious to the lungs as nectar to the tongue.</i><br>John Muir, "My First Summer in the Sierra"</p>
+						</div>
+						<div id="valuePlace" class="animated fadeIn">
+							<div class="ui divider"></div>
+							<div class="ui cards">
+								<% @locations.each do |location| %>
+									<% page = @agent.get("#{location[:url]}") %>
+									<% value = page.search('.aqivalue').first.text %>
+									<% value_reduced = value.to_i / 1 %>	
+										<div class="ui centered raised fluid card">
+											<div class="content">
+												<div class="header" style="font-size:<%= "#{value_reduced}" %>px;color:<% if value.to_i < 50 %><%= "#489A67" %><% elsif value.to_i > 50 && value.to_i < 100 %><%= "#FBDE44" %><% elsif value.to_i > 100 && value.to_i < 150 %><%= "#F19837" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#CE3834" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#682F99" %><% elsif value.to_i > 200 %><%= "#7F2024" %><% end %>">
+													<%= "#{location[:name]}" %>		
+												</div>
+												<div class="description">
+													<p>
+													<%= "Recent AQI: #{value}" %>
+													</p>
+												</div>
+											</div>
+											<div class="extra content">
+												<a href="<%= "#{location[:url]}" %>" target="_blank">more info</a>
+											</div>
+										</div>
+								<% end %>
+							</div>
+							<div class="ui divider"></div>
+							<div class="ui basic left floated segment">
+								<p>AQI data from <a href="http://waqi.info/" target="_blank">World Air Quality</a></p>
+							</div>
+							<div class="ui basic right floated segment">
+								<p><span class="green-font">Good</span> | <span class="yellow-font">Moderate</span> | <span class="orange-font">Unhealthy for Sensitive Groups</span> | <span class="red-font">Unhealthy</span> | <span class="purple-font">Very Unhealthy</span> | <span class="maroon-font">Hazardous</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
