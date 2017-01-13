@@ -4,6 +4,7 @@ require 'mechanize'
 get '/' do
 	# this initializes a Mechanize object
 	@agent = Mechanize.new
+	@agent.cookie_jar.clear!
 	# this array of hashes provides the name and URL of air quality indexes
 	# (AQIs) of various locations around the world
 	@locations = [
