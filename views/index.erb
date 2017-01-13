@@ -60,6 +60,7 @@
 							<div class="ui cards">
 								<% @locations.each do |location| %>
 									<% page = @agent.get("#{location[:url]}") %>
+									<% @agent.cookie_jar.clear! %>
 									<% value = page.search('.aqivalue').first.text %>	
 										<div class="ui centered raised fluid card">
 											<div class="content">
