@@ -2,6 +2,7 @@
 	<head>
 		<title>Air Quality Index Scraper</title>
 		<meta lang="en" charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 		<style>
@@ -61,6 +62,7 @@
 								<% @locations.each do |location| %>
 									<% page = @agent.get("#{location[:url]}") %>
 									<% @agent.cookie_jar.clear! %>
+									<% @agent.max_history = 0 %>
 									<% value = page.search('.aqivalue').first.text %>	
 										<div class="ui centered raised fluid card">
 											<div class="content">
