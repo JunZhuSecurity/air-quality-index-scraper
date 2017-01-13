@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>AQI</title>
+		<title>Air Quality Index Scraper</title>
 		<meta lang="en" charset="utf-8">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -60,11 +60,10 @@
 							<div class="ui cards">
 								<% @locations.each do |location| %>
 									<% page = @agent.get("#{location[:url]}") %>
-									<% value = page.search('.aqivalue').first.text %>
-									<% value_reduced = value.to_i / 1 %>	
+									<% value = page.search('.aqivalue').first.text %>	
 										<div class="ui centered raised fluid card">
 											<div class="content">
-												<div class="header" style="font-size:<%= "#{value_reduced}" %>px;color:<% if value.to_i < 50 %><%= "#489A67" %><% elsif value.to_i > 50 && value.to_i < 100 %><%= "#FBDE44" %><% elsif value.to_i > 100 && value.to_i < 150 %><%= "#F19837" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#CE3834" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#682F99" %><% elsif value.to_i > 200 %><%= "#7F2024" %><% end %>">
+												<div class="header" style="font-size:<%= "#{value}" %>px;color:<% if value.to_i < 50 %><%= "#489A67" %><% elsif value.to_i > 50 && value.to_i < 100 %><%= "#FBDE44" %><% elsif value.to_i > 100 && value.to_i < 150 %><%= "#F19837" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#CE3834" %><% elsif value.to_i > 150 && value.to_i < 200 %><%= "#682F99" %><% elsif value.to_i > 200 %><%= "#7F2024" %><% end %>">
 													<%= "#{location[:name]}" %>		
 												</div>
 												<div class="description">
