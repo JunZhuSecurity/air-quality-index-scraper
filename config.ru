@@ -1,4 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'aqiscraper'
-run Sinatra::Application
+
+map '/' do
+	run aqiscraper
+end
