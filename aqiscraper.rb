@@ -2,7 +2,6 @@ require 'sinatra'
 require 'mechanize'
 
 get '/' do
-<<<<<<< HEAD
 	# this initializes a Mechanize object
 	@agent = Mechanize.new
 	# this array of hashes provides the name and URL of air quality indexes
